@@ -10,15 +10,24 @@ public class Main {
             System.out.println("\n2. Exit Program");
 
             System.out.println("\nChoose an option by number input");
-            int numChoice = scanner.nextInt();
-            scanner.nextLine();
+            int numChoice;
+            try {
+                numChoice = scanner.nextInt();
+                scanner.nextLine();
+            } catch (Exception e) {
+                System.out.println("Invalid input! Please enter a number.");
+                scanner.nextLine(); // consume invalid input
+                continue;
+            }
 
             if (numChoice == 1){
                 loginMain(scanner);
             }
-            else{
+            else if (numChoice == 2){
                 System.out.println("Thank You!");
                 break;
+            } else {
+                System.out.println("Invalid choice!");
             }
 
         }
@@ -65,8 +74,16 @@ public class Main {
     
     public static void studentLayout(Scanner scanner, Student student){
         while(true){
-            int numChoice = scanner.nextInt();
-            scanner.nextLine();
+            student.displayProfile();
+            int numChoice;
+            try {
+                numChoice = scanner.nextInt();
+                scanner.nextLine();
+            } catch (Exception e) {
+                System.out.println("Invalid input! Please enter a number.");
+                scanner.nextLine(); // consume invalid input
+                continue;
+            }
             
             switch(numChoice){
                 case 1:
@@ -81,6 +98,8 @@ public class Main {
                 case 4:
                     loginMain(scanner);
                     break;
+                default:
+                    System.out.println("Invalid Input!");
             }
         }     
     }
@@ -88,8 +107,15 @@ public class Main {
     public static void homeOwnerLayout(Scanner scanner, HomeOwner ho){
         while(true){
             ho.displayProfile();
-            int numChoice = scanner.nextInt();
-            scanner.nextLine();
+            int numChoice;
+            try {
+                numChoice = scanner.nextInt();
+                scanner.nextLine();
+            } catch (Exception e) {
+                System.out.println("Invalid input! Please enter a number.");
+                scanner.nextLine(); // consume invalid input
+                continue;
+            }
                 
             switch(numChoice){
                 case 1:
@@ -113,6 +139,8 @@ public class Main {
                 case 7:
                     loginMain(scanner);
                     return;
+                default:
+                    System.out.println("Invalid Input");
             }
         }
     }
@@ -153,10 +181,27 @@ public class Main {
 
         }
         else{
+            int i = 0;
+            int selection;
             for(Property p : ho.getPropertyList()){
+                System.out.println("Property " + (i+1));
                 p.displayProperty();
                 System.out.println("\n\n\n");
+                i++;
             }
+            do{
+                System.out.print("Choose a Property you wish to remove (1-" + i + "): ");
+                while (!scanner.hasNextInt()){
+                    System.out.println("Please enter a number between 1 and " + i);
+                    scanner.next();
+                }
+                selection = scanner.nextInt();
+                scanner.nextLine(); // consume newline
+            }while( selection < 1 || selection > i );
+
+            ho.removeProperty(selection-1);
+            System.out.println("Property De-Listed!");
+    
         }
 
     }
@@ -184,10 +229,17 @@ public class Main {
     }
 
     public static void messageStudent(Scanner scanner, HomeOwner ho){
-
+        //view current messages
+        System.out.println("Messages from students:");
+        if (ho.getMessageList().isEmpty()) {
+            System.out.println("No messages.");
+        } else {
+            ho.displayMessages();
+        }
     }
     public static void searchPropMain(Scanner scanner, Student student){
-
+        SearchService searchService = new SearchService();
+        searchService.search(student, PropertyManager.getAllProperties(), scanner);
     }
     public static void viewPendMain(Scanner scanner, Student student){
         System.out.println("checking!");

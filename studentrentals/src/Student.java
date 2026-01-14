@@ -22,6 +22,10 @@ public class Student extends Account {
         this.preferences = preferences;
     }
 
+    public Preferences getPreferences(){
+        return preferences;
+    }
+
     public void bookViewing(DateRange dateRange) {
         // booking logic
     }

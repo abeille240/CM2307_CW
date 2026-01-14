@@ -9,6 +9,14 @@ public class Messaging {
         this.content = content;
     }
 
+    public Account getSender() {
+        return sender;
+    }
+    
+    public Account getReceiver(){
+        return receiver;
+    }
+
     public String getContent() {
         return content;
     }

@@ -67,7 +67,7 @@ public class HousingAttributes {
     int bedrooms;
 
     do{
-        System.out.print("Preferred bedrooms (1-12): ");
+        System.out.print("Bedrooms (1-12): ");
         while (!scanner.hasNextInt()){
         System.out.println("Please enter a number between 1 and 12!");
         scanner.next();
@@ -85,7 +85,7 @@ public class HousingAttributes {
     int bathrooms;
 
     do{
-        System.out.print("Preferred bathrooms (1-12): ");
+        System.out.print("Bathrooms (1-12): ");
         while (!scanner.hasNextInt()){
         System.out.println("Please enter a number between 1 and 12!");
         scanner.next();

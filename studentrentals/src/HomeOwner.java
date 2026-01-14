@@ -3,7 +3,7 @@ import java.util.List;
 
 public class HomeOwner extends Account {
 
-    private List<Property> propertyList = new ArrayList<>();
+    private List<Property> hoPropertyList = new ArrayList<>();
 
     public HomeOwner(String userName, String passwordHash) {
         super(userName, passwordHash);
@@ -15,7 +15,7 @@ public class HomeOwner extends Account {
         System.out.println("\n1. List Property");
         System.out.println("\n2. Remove Property");
         System.out.println("\n3. View Properties");
-        System.out.println("\n4. Message Students");
+        System.out.println("\n4. View Messages");
         System.out.println("\n5. Manage Bookings");
         System.out.println("\n6. Amend Property Status");
         System.out.println("\n7. Logout");
@@ -23,17 +23,18 @@ public class HomeOwner extends Account {
 
     }
     public void listProperty(Property property) {
-        propertyList.add(property);
+        hoPropertyList.add(property);
+        PropertyManager.addProperty(property);
     }
 
     public List<Property> getPropertyList() {
-        return propertyList;
+        return hoPropertyList;
     }
 
 
 
-    public void removeProperty(Property property) {
-        // remove property
+    public void removeProperty(int propertynum) {
+        hoPropertyList.remove(propertynum);
     }
 
     public void messageStudent(String message, Student student) {
