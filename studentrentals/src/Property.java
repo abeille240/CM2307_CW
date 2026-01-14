@@ -37,7 +37,7 @@ public class Property {
         System.out.println("Bedrooms: " + data.getBedroomPreference());
         System.out.println("Bathrooms: " + data.getBathroomPreference());
         System.out.println("Availability: " + getAvailability());
-        System.out.println("Home Owner: " + getHomeOwner()); // TODO: add getUserName if needed
+        System.out.println("Home Owner: " + getHomeOwner()); //add getUserName if needed
     }
 
     public String getPropertyName() {

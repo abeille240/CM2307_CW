@@ -190,7 +190,7 @@ public class Main {
 
     }
     public static void viewPendMain(Scanner scanner, Student student){
-
+        System.out.println("checking!");
     }
 
 }
