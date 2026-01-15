@@ -7,6 +7,9 @@ public class PropertyManager {
     public static void addProperty(Property property) {
         totalPropertyList.add(property);
     }
+    public static void removeProperty(int num) {
+        totalPropertyList.remove(num);
+    }
 
     public static List<Property> getAllProperties() {
         return totalPropertyList;

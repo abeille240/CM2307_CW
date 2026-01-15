@@ -1,28 +1,31 @@
 public class Booking {
 
     private Property property;
-    private String status;
-    private DateRange bookingDate;
+    private BookingStatus status;
+    private Student student;
 
-    public Booking(Property property, DateRange bookingDate) {
+    public Booking(Property property, Student student) {
         this.property = property;
-        this.bookingDate = bookingDate;
-        this.status = "PENDING";
+        this.student = student;
+        this.status = BookingStatus.REQUESTED;
     }
 
-    public void cancelBooking(String userName) {
-        status = "CANCELLED";
+    public Property getProperty(){
+        return property;
     }
 
-    public void notifyUser(String message, String userName) {
-        // notification logic
+    public Student getStudent(){
+        return student;
     }
 
-    public void amendAvailability() {
-        // availability update
+    public BookingStatus getStatus(){
+        return status;
     }
 
-    public boolean checkAvailability() {
-        return true;
+    public void confirm(){
+        status = BookingStatus.CONFIRMED;
+    }
+    public void cancel(){
+        status = BookingStatus.CANCELLED;
     }
 }

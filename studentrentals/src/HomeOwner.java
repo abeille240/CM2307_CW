@@ -9,6 +9,8 @@ public class HomeOwner extends Account {
         super(userName, passwordHash);
     }
 
+
+    //MENU
     @Override
     public void displayProfile(){
         System.out.println("Welcome HomeOwner " + userName + "!");
@@ -22,6 +24,8 @@ public class HomeOwner extends Account {
         System.out.println("Choose an option by number input");
 
     }
+
+    //LISTING ON MAIN
     public void listProperty(Property property) {
         hoPropertyList.add(property);
         PropertyManager.addProperty(property);
@@ -31,25 +35,37 @@ public class HomeOwner extends Account {
         return hoPropertyList;
     }
 
-
-
     public void removeProperty(int propertynum) {
         hoPropertyList.remove(propertynum);
+        PropertyManager.removeProperty(propertynum);
     }
 
+
+    //MESSAGING 
     public void messageStudent(String message, Student student) {
         sendMessage(message, student);
     }
 
-    public void manageBooking() {
-        // manage bookings
+
+    //BOOKINGS
+    public List<Booking> manageBookings() {
+        List<Booking> result = new ArrayList<>();
+        for (Property p : getPropertyList()) {
+            result.addAll(p.getBookings());
+        }
+        return result;
+    }
+    
+
+    //STATUS SHIT
+    public boolean markPropertyPending(Property property, Booking booking) {
+        if (booking.getStatus() != BookingStatus.CONFIRMED) {
+            System.out.println("Booking must be confirmed first.");
+            return false;
+        }
+        return property.markPending();
     }
 
-    public void amendPropertyStatus() {
-        // update property status
-    }
 
-    public void displayProperties() {
-        // show owned properties
-    }
+
 }

@@ -10,20 +10,24 @@ public class SearchService {
         List<Property> recommended = reccomendations.getRecommendations(student, allProperties, 5); // Top 5
         displayAllProperties(recommended);
 
+        //DETAIL OF PROPERTY + MESSAGING
+        int choice;
         if (!recommended.isEmpty()) {
-            System.out.println("Enter the name of the property to view details (or press Enter to skip): ");
+            System.out.println("\n\nEnter the name of the property to view details or press Enter to skip.");
             String propertyName = scanner.nextLine().trim();
             if (!propertyName.isEmpty()) {
                 Property selected = findPropertyByName(recommended, propertyName);
                 if (selected != null) {
                     selected.displayProperty();
-                    System.out.println("Would you like to send a query message to the homeowner? (y/n): ");
-                    String choice = scanner.nextLine().trim().toLowerCase();
-                    if (choice.equals("y")) {
-                        System.out.println("Enter your message: ");
+                    System.out.println("\nWould you like to send a query message to the homeowner?");
+                    System.out.println("\n1. Yes Please!\n2. No Thanks");
+                    choice = scanner.nextInt();                    
+                    scanner.nextLine();
+                    if (choice == 1){
+                        System.out.println("\nEnter your message: ");
                         String message = scanner.nextLine();
                         student.sendMessage(message, selected.getHomeOwner());
-                        System.out.println("Message sent!");
+                        System.out.println("\n\nMessage sent!");
                     }
                 } else {
                     System.out.println("Property not found in recommendations.");
@@ -47,16 +51,9 @@ public class SearchService {
             return;
         }
         for (Property p : properties) {
-            p.displayProperty();
+            System.out.println(p.getPropertyName());
             System.out.println("---");
         }
     }
 
-    public void displayProperty(String propertyName) {
-        // Implement if needed
-    }
-
-    public List<Property> filterProperties(List<Property> properties) {
-        return properties; // Placeholder
-    }
 }

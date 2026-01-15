@@ -23,19 +23,31 @@ public class Authorisation {
             while((currentLine = breader.readLine()) != null)
             {
                 data = currentLine.split(delimiter);
+                String fileUsername = data[0];
+                String filePassword = data[1];
+                int accType = Integer.parseInt(data[2]);
 
                 if(data[0].equals(username) && data[1].equals(password)){
     
-                // retrieve account type
-                int accType = Integer.parseInt(data[2]);
+                    Account existing = AccountManager.getAccount(username);
+                    if(existing != null){
+                        return existing;
+                    }
                     
                     // instantiate account
+                    Account account;
                     if(accType == 1) {
-                        return new HomeOwner(username, password);
+                        account = new HomeOwner(username, password);
                     }
                     else if(accType == 2){
-                        return new Student(username, password, null);
+                        account = new Student(username, password, null);
                     }
+                    else{
+                        return null;
+                    }
+
+                    AccountManager.addAccount(account);
+                    return account;
                 }
 
             }

@@ -7,25 +7,38 @@ public class Property {
     private Preferences houseData;
     private String houseDescription;
     private HomeOwner homeOwner;
-    private List<DateRange> bookingDateRange;
     private Student bookedStudent;
-    private int availability;
+    private List<Booking> bookings = new ArrayList<>();
+    private BookingStatus status;
+    private SaleStatus saleStatus = SaleStatus.AVAILABLE;
 
-    public Property(String name, Preferences data, String description, HomeOwner homeOwner, int availability) {
+    public Property(String name, Preferences data, String description, HomeOwner homeOwner) {
         this.propertyName = name;
         this.houseData = data;
         this.houseDescription = description;
         this.homeOwner = homeOwner;
-        this.bookingDateRange = new ArrayList<>();
-        this.availability = availability;
     }
 
-
-
-    public void setBookedStudent(Student student) {
-        this.bookedStudent = student;
-        availability = 2;
+    public SaleStatus getSaleStatus() {
+        return saleStatus;
     }
+
+    public boolean markPending() {
+    if (saleStatus != SaleStatus.AVAILABLE) {
+        return false;
+    }
+    saleStatus = SaleStatus.PENDING;
+    return true;
+    }
+
+    public boolean markSold() {
+    if (saleStatus != SaleStatus.PENDING) {
+        return false;
+    }
+    saleStatus = SaleStatus.SOLD;
+    return true;
+    }
+
 
     public void displayProperty(){
         System.out.println("Property Name: " + getPropertyName());
@@ -36,7 +49,7 @@ public class Property {
         System.out.println("Utilities: " + (data.getUtilityPreference() ? "Yes" : "No"));
         System.out.println("Bedrooms: " + data.getBedroomPreference());
         System.out.println("Bathrooms: " + data.getBathroomPreference());
-        System.out.println("Availability: " + getAvailability());
+        System.out.println("Availability: " + getSaleStatus());
         System.out.println("Home Owner: " + getHomeOwner().getUserName());
     }
 
@@ -56,24 +69,28 @@ public class Property {
         return homeOwner;
     }
 
-    public List<DateRange> getBookingDateRange() {
-        return bookingDateRange;
+    //AI
+    public boolean isBooked(Student student){
+        return bookings.stream()
+                .anyMatch(b -> b.getStudent().equals(student)
+                        && b.getStatus() != BookingStatus.CANCELLED);
+
     }
 
-    public Student getBookedStudent() {
-        return bookedStudent;
+    public void addBooking(Booking booking){
+        bookings.add(booking);
     }
 
-    public String getAvailability() {
-        switch(availability){
-            case 1:
-                return("Available");
-            case 2:
-                return("Pending");
-            case 3:
-                return("Sold");
-            default:
-                return("Error");
-        }
+    public List<Booking> getBookings(){
+        return bookings;
     }
+
+    public SaleStatus getSaleStatus(){
+        return saleStatus;
+    }
+
+    public void setSaleStatus(SaleStatus status){
+        this.saleStatus = status;
+    }
+
 }
