@@ -16,10 +16,6 @@ public class Preferences {
         this.bathroomPreference = bathroomPreference;
     }
 
-    public void printPreferences(){
-
-    }
-
     public int getPricePreference() {
         return pricePreference;
     }

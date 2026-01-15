@@ -3,9 +3,9 @@ import java.util.List;
 import java.util.Scanner;
 
 // Abstract Class for shared Student and HomeOwner methods
-//Used for Login
+// Used for Login
 // Used for Messaging
-//TO Reavaluate for hashmap passwords
+// TODO: Reevaluate for hashing passwords
 public abstract class Account {
 
     protected String userName;
@@ -17,7 +17,7 @@ public abstract class Account {
         this.password = password;
         this.messageList = new ArrayList<>();
     }
-    
+
     public void displayProfile() {
         // display account profile
     }

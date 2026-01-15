@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class  Main {
     public static void main(String[] args) {
         System.out.println("Welcome to StudentRentals!\n");
         
@@ -16,7 +16,7 @@ public class Main {
                 numChoice = scanner.nextInt();
                 scanner.nextLine();
             } catch (Exception e) {
-                System.out.println("\n- Invalid input! Please enter a number. -\n");
+                System.out.println("\n- Invalid input! Please enter 1 for Login or 2 to Exit. -\n");
                 scanner.nextLine(); // consume invalid input
                 continue;
             }
@@ -113,10 +113,7 @@ public class Main {
                     manageBookings(scanner, student);
                     break;
                 case 5:
-                    viewPendMain(scanner, student);
-                    break;
-                case 6:
-                    System.out.println("Succesfully Logged out, bye bye!");
+                    System.out.println("Successfully logged out. Goodbye!");
                     loginMain(scanner);
                     return;
                 default:
@@ -142,11 +139,6 @@ public class Main {
     public static void searchPropMain(Scanner scanner, Student student){
         SearchService searchService = new SearchService();
         searchService.search(student, PropertyManager.getAllProperties(), scanner);
-    }
-
-        // VIEW PENDING CONFIRMATIONS
-    public static void viewPendMain(Scanner scanner, Student student){
-        System.out.println("checking!");
     }
 
         // MESSAGE HOMEOWNER
@@ -260,7 +252,7 @@ public class Main {
                     amendPropStatusMain(scanner, ho);
                     break;
                 case 7:
-                    System.out.println("Succesfully Logged out, bye bye!");
+                    System.out.println("Successfully logged out. Goodbye!");
                     loginMain(scanner);
                     return;
                 default:
@@ -320,7 +312,7 @@ public class Main {
 
             ho.removeProperty(selection-1);
             
-            System.out.println("P\n\n\noof! Property De-Listed!\n\n");
+            System.out.println("\n\n\nPoof! Property De-Listed!\n\n");
         }
     }
 
@@ -342,57 +334,12 @@ public class Main {
     
 
     public static void amendPropStatusMain(Scanner scanner, HomeOwner ho){
-        //list bookings 
-        //select which to amend
-        //ho.markPropertyPending()
+        ho.amendProperty();
+
     }
 
     public static void manageBookingMain(Scanner scanner, HomeOwner ho){
-        List<Booking> bookings = ho.manageBookings();
-        if(bookings.isEmpty()){
-            System.out.println("No bookings for your properties.");
-            return;
-        }
-        System.out.println("Bookings for your properties:");
-        for(int i=0; i<bookings.size(); i++){
-            Booking b = bookings.get(i);
-            System.out.println((i+1) + ". Student: " + b.getStudent().getUserName() + ", Property: " + b.getProperty().getPropertyName() + ", Status: " + b.getStatus());
-        }
-        System.out.print("Enter the number of the booking to manage (or 0 to exit): ");
-        int num;
-        try {
-            num = scanner.nextInt();
-            scanner.nextLine();
-        } catch (Exception e) {
-            scanner.nextLine();
-            System.out.println("Invalid input.");
-            return;
-        }
-        if(num == 0) return;
-        if(num < 1 || num > bookings.size()){
-            System.out.println("Invalid number.");
-            return;
-        }
-        Booking selected = bookings.get(num-1);
-        System.out.println("1. Confirm booking\n2. Cancel booking");
-        int choice;
-        try {
-            choice = scanner.nextInt();
-            scanner.nextLine();
-        } catch (Exception e) {
-            scanner.nextLine();
-            System.out.println("Invalid input.");
-            return;
-        }
-        if(choice == 1){
-            selected.confirm();
-            System.out.println("Booking confirmed.");
-        }else if(choice == 2){
-            selected.cancel();
-            System.out.println("Booking cancelled.");
-        }else{
-            System.out.println("Invalid choice.");
-        }
+        ho.manageBookings();
     }
 
     public static void messageStudent(Scanner scanner, HomeOwner ho){

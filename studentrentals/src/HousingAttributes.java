@@ -24,7 +24,7 @@ public class HousingAttributes {
                 scanner.next();
             }
             price = scanner.nextInt();
-        } while (price <= 100 && price >= 500);
+        } while (price <= 100 || price >= 500);
 
         scanner.nextLine();
         return price;
@@ -67,7 +67,7 @@ public class HousingAttributes {
     int bedrooms;
 
     do{
-        System.out.print("\nBedrooms (1-12): ");
+        System.out.print("\nBedrooms (1-11): ");
         while (!scanner.hasNextInt()){
         System.out.println("\nPlease enter a number between 1 and 11!\n");
         scanner.next();
@@ -88,14 +88,14 @@ public class HousingAttributes {
     int bathrooms;
 
     do{
-        System.out.print("\nBathrooms (1-12): ");
+        System.out.print("\nBathrooms (1-11): ");
         while (!scanner.hasNextInt()){
-        System.out.println("\nPlease enter a number between 1 and 12!\n");
+        System.out.println("\nPlease enter a number between 1 and 11!\n");
         scanner.next();
         }
         bathrooms = scanner.nextInt();
             if( bathrooms < 1 || bathrooms > 12 ){
-        System.out.println("\nPlease enter a number between 1 and 12!\n");}
+        System.out.println("\nPlease enter a number between 1 and 11!\n");}
     }while( bathrooms < 1 || bathrooms > 12 );
 
     scanner.nextLine();

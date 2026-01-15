@@ -28,7 +28,7 @@ public class Authorisation {
                 int accType = Integer.parseInt(data[2]);
 
                 if(data[0].equals(username) && data[1].equals(password)){
-    
+
                     Account existing = AccountManager.getAccount(username);
                     if(existing != null){
                         return existing;
@@ -56,10 +56,6 @@ public class Authorisation {
             System.out.println(e);
         }
         return null;
-    }
-
-    public void logout() {
-        // logout logic
     }
 
 

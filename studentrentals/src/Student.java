@@ -16,8 +16,7 @@ public class Student extends Account {
         System.out.println("\n2. Search Properties");
         System.out.println("\n3. View Messages");
         System.out.println("\n4. Manage Bookings");
-        System.out.println("\n5. View Pending Properties");
-        System.out.println("\n6. Logout");
+        System.out.println("\n5. Logout");
 
         System.out.println("\nChoose an option by number input");
       
@@ -56,13 +55,6 @@ public class Student extends Account {
         }
     }
     return result;
-    }
-
-
-
-
-    public void displayPendingProperties() {
-        // display pending bookings
     }
 
 

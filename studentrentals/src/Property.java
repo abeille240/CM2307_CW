@@ -7,9 +7,7 @@ public class Property {
     private Preferences houseData;
     private String houseDescription;
     private HomeOwner homeOwner;
-    private Student bookedStudent;
     private List<Booking> bookings = new ArrayList<>();
-    private BookingStatus status;
     private SaleStatus saleStatus = SaleStatus.AVAILABLE;
 
     public Property(String name, Preferences data, String description, HomeOwner homeOwner) {
@@ -18,7 +16,6 @@ public class Property {
         this.houseDescription = description;
         this.homeOwner = homeOwner;
     }
-
     public SaleStatus getSaleStatus() {
         return saleStatus;
     }
@@ -69,7 +66,6 @@ public class Property {
         return homeOwner;
     }
 
-    //AI
     public boolean isBooked(Student student){
         return bookings.stream()
                 .anyMatch(b -> b.getStudent().equals(student)
@@ -83,14 +79,6 @@ public class Property {
 
     public List<Booking> getBookings(){
         return bookings;
-    }
-
-    public SaleStatus getSaleStatus(){
-        return saleStatus;
-    }
-
-    public void setSaleStatus(SaleStatus status){
-        this.saleStatus = status;
     }
 
 }
